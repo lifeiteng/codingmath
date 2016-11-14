@@ -1,0 +1,8 @@
+not-shared not-split SIL
+shared split AA
+shared split AW
+shared split ER
+shared split HH
+shared split R
+shared split UW
+shared split Y

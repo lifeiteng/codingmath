@@ -1,0 +1,8 @@
+<eps> 0
+!SIL 1
+are 2
+how 3
+you 4
+#0 5
+<s> 6
+</s> 7

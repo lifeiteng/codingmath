@@ -1,0 +1,49 @@
+digraph FST {
+rankdir = LR;
+size = "8.5,11";
+label = "";
+center = 1;
+orientation = Landscape;
+ranksep = "0.4";
+nodesep = "0.25";
+0 [label = "0", shape = circle, style = bold, fontsize = 14]
+	0 -> 1 [label = "SIL:<eps>/0.69885", fontsize = 14];
+	0 -> 2 [label = "HH:how/0.47917", fontsize = 14];
+	0 -> 3 [label = "#0:<eps>/228.62", fontsize = 14];
+1 [label = "1", shape = circle, style = solid, fontsize = 14]
+	1 -> 12 [label = "#1:<eps>/-0.11011", fontsize = 14];
+2 [label = "2", shape = circle, style = solid, fontsize = 14]
+	2 -> 10 [label = "AW:<eps>/-0.10952", fontsize = 14];
+3 [label = "3/1.8218", shape = doublecircle, style = solid, fontsize = 14]
+	3 -> 4 [label = "AA:are/1.3407", fontsize = 14];
+	3 -> 5 [label = "ER:are/1.2304", fontsize = 14];
+	3 -> 2 [label = "HH:how/1.6076", fontsize = 14];
+	3 -> 6 [label = "Y:you/1.6076", fontsize = 14];
+4 [label = "4", shape = circle, style = solid, fontsize = 14]
+	4 -> 5 [label = "R:<eps>/-0.11026", fontsize = 14];
+5 [label = "5/1.2847", shape = doublecircle, style = solid, fontsize = 14]
+	5 -> 8 [label = "SIL:<eps>/0.69917", fontsize = 14];
+	5 -> 6 [label = "Y:you/1.0706", fontsize = 14];
+	5 -> 3 [label = "#0:<eps>/17.384", fontsize = 14];
+6 [label = "6", shape = circle, style = solid, fontsize = 14]
+	6 -> 10 [label = "UW:<eps>/-0.10952", fontsize = 14];
+7 [label = "7", shape = circle, style = solid, fontsize = 14]
+	7 -> 11 [label = "#1:<eps>/-0.10973", fontsize = 14];
+8 [label = "8", shape = circle, style = solid, fontsize = 14]
+	8 -> 9 [label = "#1:<eps>/-0.11037", fontsize = 14];
+9 [label = "9/0.69594", shape = doublecircle, style = solid, fontsize = 14]
+	9 -> 6 [label = "Y:you/0.48176", fontsize = 14];
+	9 -> 3 [label = "#0:<eps>/16.795", fontsize = 14];
+10 [label = "10", shape = circle, style = solid, fontsize = 14]
+	10 -> 7 [label = "SIL:<eps>/0.69936", fontsize = 14];
+	10 -> 4 [label = "AA:are/1.2293", fontsize = 14];
+	10 -> 5 [label = "ER:are/1.119", fontsize = 14];
+	10 -> 3 [label = "#0:<eps>/228.94", fontsize = 14];
+11 [label = "11", shape = circle, style = solid, fontsize = 14]
+	11 -> 4 [label = "AA:are/0.63966", fontsize = 14];
+	11 -> 5 [label = "ER:are/0.52941", fontsize = 14];
+	11 -> 3 [label = "#0:<eps>/228.35", fontsize = 14];
+12 [label = "12", shape = circle, style = solid, fontsize = 14]
+	12 -> 2 [label = "HH:how/-0.10957", fontsize = 14];
+	12 -> 3 [label = "#0:<eps>/228.03", fontsize = 14];
+}
