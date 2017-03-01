@@ -17,9 +17,6 @@
 #define EXPECT_GT(val1, val2)  EXPECT_OP(>, val1, val2)
 #define EXPECT_LT(val1, val2)  EXPECT_OP(<, val1, val2)
 
-
-using namespace webrtc;
-
 int usage() {
     std::cout <<
               "Usage: webrtc-audio-process -anc|-agc|-aec value input.wav output.wav [delay_ms echo_in.wav]"
@@ -27,8 +24,7 @@ int usage() {
     return 1;
 }
 
-
-bool ReadFrame(FILE* file, AudioFrame* frame) {
+bool ReadFrame(FILE* file, webrtc::AudioFrame* frame) {
     // The files always contain stereo audio.
     size_t frame_size = frame->samples_per_channel_;
     size_t read_count = fread(frame->data_,
@@ -43,7 +39,7 @@ bool ReadFrame(FILE* file, AudioFrame* frame) {
     return true;
 }
 
-bool WriteFrame(FILE* file, AudioFrame* frame) {
+bool WriteFrame(FILE* file, webrtc::AudioFrame* frame) {
     // The files always contain stereo audio.
     size_t frame_size = frame->samples_per_channel_;
     size_t read_count = fwrite (frame->data_,
@@ -65,12 +61,12 @@ int main(int argc, char **argv) {
     FILE *echo_in = NULL;
     int level, delay_ms = -1;
     level = atoi(argv[2]);
+
     // Usage example, omitting error checking:
-    AudioProcessing* apm = AudioProcessing::Create();
+    webrtc::AudioProcessing* apm = webrtc::AudioProcessing::Create();
     apm->high_pass_filter()->Enable(true);
     if (std::string(argv[1]) == "-anc") {
-
-        std::cout << "ANC: level is " << level << std::endl;
+        std::cout << "ANC: level " << level << std::endl;
         apm->noise_suppression()->Enable(true);
         switch (level) {
         case 0:
@@ -90,6 +86,7 @@ int main(int argc, char **argv) {
         }
         apm->voice_detection()->Enable(true);
     } else if (std::string(argv[1]) == "-agc") {
+        std::cout << "AGC: model " << level << std::endl;
         apm->gain_control()->Enable(true);
         apm->gain_control()->set_analog_level_limits(0, 255);
         switch (level) {
@@ -106,10 +103,11 @@ int main(int argc, char **argv) {
             apm->gain_control()->set_mode(webrtc::GainControl::kAdaptiveAnalog);
         }
     } else if (std::string(argv[1]) == "-aec") {
-        EchoCancellation *echo_canell = apm->echo_cancellation();
+        webrtc::EchoCancellation *echo_canell = apm->echo_cancellation();
         is_echo_cancel = true;
         echo_canell->enable_drift_compensation(false);
         echo_canell->Enable(true);
+        std::cout << "AEC: level " << level << std::endl;
         switch (level) {
             case 0:
                 echo_canell->set_suppression_level(webrtc::EchoCancellation::kLowSuppression);
@@ -128,15 +126,15 @@ int main(int argc, char **argv) {
         return usage();
     }
 
-    AudioFrame *frame = new AudioFrame();
+    webrtc::AudioFrame *frame = new webrtc::AudioFrame();
     float frame_step = 10;  // ms
     frame->sample_rate_hz_ = 16000;
     frame->samples_per_channel_ = frame->sample_rate_hz_ * frame_step / 1000.0;
 
     frame->num_channels_ = 1;
-    AudioFrame *echo_frame = NULL;
+    webrtc::AudioFrame *echo_frame = NULL;
     if (is_echo_cancel) {
-        echo_frame = new AudioFrame();
+        echo_frame = new webrtc::AudioFrame();
     }
 
     FILE *wav_in = fopen(argv[3], "rb");
